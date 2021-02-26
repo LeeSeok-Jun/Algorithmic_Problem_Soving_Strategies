@@ -16,6 +16,9 @@ def addTo(a, b, k):
     while (len(a) != newsize):
         a.append(0)
 
+    while (len(b) != newsize):
+        b.append(0)
+
     # b의 최소 자리수부터 부터 더함
     for i in range(k, newsize):
         a[i] = a[i] + b[i - k]
@@ -30,13 +33,13 @@ def subFrom(a, b):
 
     normalize(a)
 
-def karatuba(a, b):
+def karatsuba(a, b):
     an = len(a)
     bn = len(b)
 
     # a가 b보다 짧은 경우 교체
     if an < bn:
-        return karatuba(b, a)
+        return karatsuba(b, a)
 
     # 기저 사례 1 : a나 b가 빈 리스트인 경우
     if an == 0 or bn == 0:
@@ -53,13 +56,14 @@ def karatuba(a, b):
     b0 = b[:min(bn, half)]
     b1 = b[min(bn, half):]
 
-    z2 = karatuba(a1, b1)
-    z0 = karatuba(a0, b0)
+    z0 = karatsuba(a0, b0)
+    z2 = karatsuba(a1, b1)
 
     addTo(a0, a1, 0)
     addTo(b0, b1, 0)
 
-    z1 = karatuba(a0, b0)
+    z1 = karatsuba(a0, b0)
+
     subFrom(z1, z0)
     subFrom(z1, z2)
 
@@ -67,6 +71,7 @@ def karatuba(a, b):
     addTo(result, z0, 0)
     addTo(result, z1, half)
     addTo(result, z2, 2*half)
+
     return result
 
-print(karatuba([4, 3, 2, 1], [8, 7, 6, 5]))
+print(karatsuba([4, 3, 2, 1], [9, 8, 7, 6, 5]))
