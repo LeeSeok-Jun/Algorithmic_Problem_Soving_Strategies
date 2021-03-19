@@ -14,10 +14,10 @@ def reverse(quad, it):
         return head, it
 
     # 혼합 구역인 경우 4분면으로 나눠 뒤집는다.
-    part_one, it = reverse(head, it) # 1사분면에 대한 뒤집기를 실행하고 인덱스 반환
-    part_two, it = reverse(head, it) # 2사분면, 3사분면, 4사분면에 대해 동일하게 실행
-    part_three, it = reverse(head, it)
-    part_four, it = reverse(head, it)
+    part_one, it = reverse(quad, it) # 1사분면에 대한 뒤집기를 실행하고 인덱스 반환
+    part_two, it = reverse(quad, it) # 2사분면, 3사분면, 4사분면에 대해 동일하게 실행
+    part_three, it = reverse(quad, it)
+    part_four, it = reverse(quad, it)
 
     return 'x' + part_three + part_four + part_one + part_two, it # 뒤집힌 결과를 문자열로 만들어 인덱스와 함께 반환
 
