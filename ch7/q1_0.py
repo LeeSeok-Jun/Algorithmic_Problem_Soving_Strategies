@@ -5,7 +5,7 @@
 - 압축을 풀지 않고 뒤집는 방법을 사용하는 방법을 고안할 필요가 있음
 """
 
-def reverse(head, it):
+def reverse(quad, it):
     head = quad[it]
     it += 1
 
