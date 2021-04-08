@@ -9,7 +9,7 @@
 
 from code8_9 import path
 
-cache = [[-1] * 100 for _ in range(100)]
+countCache = [[-1] * 100 for _ in range(100)]
 
 n = int(input())
 
@@ -20,15 +20,15 @@ def count(r, c) :
         return 1
 
     # 메모이제이션
-    if cache[r][c] != -1:
-        return cache[r][c]
+    if countCache[r][c] != -1:
+        return countCache[r][c]
 
-    cache[r][c] = 0
+    countCache[r][c] = 0
 
     if path(r+1, c+1) >= path(r+1, c):
-        cache[r][c] += count(r+1, c+1)
+        countCache[r][c] += count(r+1, c+1)
     
     if path(r+1, c+1) <= path(r+1, c):
-        cache[r][c] += count(r+1, c)
+        countCache[r][c] += count(r+1, c)
 
-    return cache[r][c]
+    return countCache[r][c]
