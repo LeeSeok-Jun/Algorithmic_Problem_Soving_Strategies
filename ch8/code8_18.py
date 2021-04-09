@@ -22,7 +22,7 @@
 # m일 동안 n미터 이상 오를 확률 계산
 n, m = map(int, input().split())
 
-cache = [[-1] * (2 * n + 1) for _ in range(n)]
+cache = [[-1] * (2 * n + 1) for _ in range(m)]
 
 # 경우의 수를 반환 -> 최종적으로 2^m으로 값을 나누어야 확률을 계산 가능
 def climb(days, climbed):
@@ -35,8 +35,10 @@ def climb(days, climbed):
         return cache[days][climbed]
 
     # 1미터 올라간 경우 + 2미터 올라간 경우
-    cache[days][climbed] = climbed(days + 1, climbed + 1) + climbed(days + 1, climbed + 2)
+    cache[days][climbed] = climb(days + 1, climbed + 1) + climb(days + 1, climbed + 2)
     return cache[days][climbed]
+
+cache2 = [[-1] * (2 * n + 1) for _ in range(m)]
 
 # 만일 비올 확률이 75%면??
 # 이 함수는 경우의 수가 아닌 확률을 직접 반환하게 된다.
@@ -46,9 +48,13 @@ def climb2(days, climbed):
         return 1 if climbed >= n else 0
 
     # 메모이제이션
-    if cache[days][climbed] != -1:
-        return cache[days][climbed]
+    if cache2[days][climbed] != -1:
+        return cache2[days][climbed]
 
     # 1미터 올라간 경우 + 2미터 올라간 경우
-    cache[days][climbed] = 0.25 * climbed(days + 1, climbed + 1) + 0.75 * climbed(days + 1, climbed + 2)
-    return cache[days][climbed]
+    cache2[days][climbed] = 0.25 * climb2(days + 1, climbed + 1) + 0.75 * climb2(days + 1, climbed + 2)
+    return cache2[days][climbed]
+
+
+print(climb(0, 0) / 2**m)
+print(climb2(0, 0))
