@@ -26,6 +26,10 @@ for i in range(n):
 # bool 자료형을 메모이제이션하지 않고 비트 형태로 치환하여 사용
 # 예를 들어 [True, False, True, False]인 경우 0b1010 같이 표현 가능
 # 1<<4의 경우 0b10000 와 같이 1 뒤에 0이 4개 붙는 형식
+
+# 유의해야 될 점은 일반적인 경우와 달리 n번 부터 역순으로 차례로 저장되는 형태로 구현되었다.
+# 예를 들어 4개 마을(0~3번 마을) 중 0번 마을을 방문했으면 1000이 아닌 0001이다.
+# 3번 마을을 방문했으면 0001이 아닌 1000이다.
 cache = [[-1] * int(1<<n) for _ in range(n)]
 
 def shortestPath2(here, visited):
@@ -58,4 +62,4 @@ def shortestPath2(here, visited):
 
     return cache[here][visited]
 
-print(shortestPath2(0, 1<<(n-1)))
+print(shortestPath2(0, 0))
